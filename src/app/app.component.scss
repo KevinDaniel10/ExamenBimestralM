@@ -1,10 +1,58 @@
-ion-avatar img {
-    width: 50px;
-    height: 50px;
-  }
-  
-  ion-label {
-    font-size: 18px;
-    margin-left: 10px;
-  }
-  
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.intro-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 20px;
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  color: white;
+}
+
+.intro-image {
+  width: 300px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.intro-text h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.intro-text p {
+  font-size: 1rem;
+  color: #bbb;
+}
+
+.book-item {
+  background: #2d2d2d;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: white;
+}
+
+.save-button {
+  background-color: #4c8bf5;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #3673e3;
+}

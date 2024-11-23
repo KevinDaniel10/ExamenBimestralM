@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DogService } from './dog.service';
+import { StorageService } from './storage.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { DogService } from './dog.service';
 export class AppComponent implements OnInit {
   books: { title: string; dogImage: string }[] = [];
 
-  constructor(private dogService: DogService) {}
+  constructor(
+    private dogService: DogService,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit() {
     this.loadBooks();
@@ -23,10 +27,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // Obtener las imágenes de perros
+  // Obtener las imágenes de perros y mostrar en la lista sin guardarlas en Firebase automáticamente
   fetchDogImages(bookTitles: any[]) {
     bookTitles.forEach((book: any) => {
       this.dogService.getDogImage().subscribe((dogResponse) => {
+        // Aquí se agrega el libro y la imagen en el array de books sin guardarlos automáticamente
         this.books.push({
           title: book.title, // El título del libro
           dogImage: dogResponse.message, // La imagen del perro
@@ -34,5 +39,22 @@ export class AppComponent implements OnInit {
       });
     });
   }
-}
 
+  // Método para guardar el título del libro y la URL de la imagen en Firebase
+  async saveBookAndImage(title: string, dogImage: string) {
+    try {
+      const result = await this.storageService.addNote({
+        title: title, // Título del libro
+        text: dogImage, // URL de la imagen del perro
+      });
+
+      if (result) {
+        console.log('Elemento guardado correctamente en Firebase');
+      } else {
+        console.error('Error al guardar el elemento en Firebase');
+      }
+    } catch (error) {
+      console.error('Error al guardar el elemento:', error);
+    }
+  }
+}
