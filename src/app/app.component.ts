@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DogService } from './dog.service';
 import { StorageService } from './storage.service';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,23 @@ export class AppComponent implements OnInit {
   books: { title: string; dogImage: string }[] = [];
 
   constructor(
+
     private dogService: DogService,
-    private storageService: StorageService
-  ) {}
+    private storageService: StorageService,
+    
+  ) {
+    this.showSplash();
+  }
 
   ngOnInit() {
     this.loadBooks();
+  }
+
+  async showSplash(){
+    await SplashScreen.show({
+      autoHide: true,
+      showDuration: 3000
+    });
   }
 
   // Cargar los libros y las imágenes de los perros
